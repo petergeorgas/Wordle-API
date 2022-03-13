@@ -6,7 +6,7 @@ A simple API designed to run as a serverless function that you can use for your 
 
 A live version of this application is currently hosted on Vercel. The answer to the the day's Wordle is located at `/`. To consume the API, Send a `POST` request to `/api/wordle` with the request body:
 
-```js
+```json
 {
     "guess":"words"
 }
@@ -14,7 +14,7 @@ A live version of this application is currently hosted on Vercel. The answer to 
 
 , where `"words"` is whatever word you'd like to guess. A guess yields an API response that looks like this:
 
-```js
+```json
 {
 	"guess": "cross",
 	"was_correct": true
@@ -23,7 +23,7 @@ A live version of this application is currently hosted on Vercel. The answer to 
 
 while an incorrect guess yields an API response that looks like this:
 
-```js
+```json
 {
 	"guess": "beans",
 	"was_correct": false,
