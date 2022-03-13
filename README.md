@@ -1,34 +1,73 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Worlde API
 
-## Getting Started
+A simple API designed to run as a serverless function that you can use for your Wordle clone. The whole point of this API is to allow you to create a Wordle clone that keeps the answer OFF of the user's computer. This enables you, the developer, to completely prevent users from cheating by looking for the locally-stored answer to the day's word puzzle.
 
-First, run the development server:
+### Usage
 
-```bash
-npm run dev
-# or
-yarn dev
+A live version of this application is currently hosted on Vercel. The answer to the the day's Wordle is located at `/`. To consume the API, Send a `POST` request to `/api/wordle` with the request body:
+
+```js
+{
+    "guess":"words"
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+, where `"words"` is whatever word you'd like to guess. A guess yields an API response that looks like this:
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```js
+{
+	"guess": "cross",
+	"was_correct": true
+}
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+while an incorrect guess yields an API response that looks like this:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```js
+{
+	"guess": "beans",
+	"was_correct": false,
+	"character_info": [
+		{
+			"char": "b",
+			"scoring": {
+				"in_word": false,
+				"correct_idx": false
+			}
+		},
+		{
+			"char": "e",
+			"scoring": {
+				"in_word": false,
+				"correct_idx": false
+			}
+		},
+		{
+			"char": "a",
+			"scoring": {
+				"in_word": false,
+				"correct_idx": false
+			}
+		},
+		{
+			"char": "n",
+			"scoring": {
+				"in_word": false,
+				"correct_idx": false
+			}
+		},
+		{
+			"char": "s",
+			"scoring": {
+				"in_word": true,
+				"correct_idx": true
+			}
+		}
+	]
+}
+```
 
-## Learn More
+### Limitations
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Currently, the word bank only consits of 5-letter words. Eventually, shorter (4-letter) and longer (6-, 7-, 8- letter) words will be added
+- The API does not currently check to see if a guess is in the word bank, which is a feature of many Wordle clones, as well as Wordle itself.
