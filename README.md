@@ -4,7 +4,7 @@ A simple API designed to run as a serverless function that you can use for your 
 
 ### Usage
 
-A live version of this application is currently hosted on Vercel. The answer to the the day's Wordle is located at `/`. To consume the API, Send a `POST` request to `/api/wordle` with the request body:
+A live version of this application is currently hosted on Vercel. The answer to the the day's Wordle is located [here](https://wordle-api.vercel.app/). To consume the API, Send a `POST` request to `https://wordle-api.vercel.app/api/wordle` with the request body:
 
 ```json
 {
