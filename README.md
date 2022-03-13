@@ -12,7 +12,7 @@ A live version of this application is currently hosted on Vercel. The answer to 
 }
 ```
 
-, where `"words"` is whatever word you'd like to guess. A guess yields an API response that looks like this:
+, where `"words"` is whatever word you'd like to guess. A correct guess yields an API response that looks like this:
 
 ```json
 {
