@@ -4,10 +4,14 @@ import { five_char_words } from "./word_list";
 let cached_date: Date = new Date();
 let cached_idx = -1;
 
-const getDayOfYear = (date: Date): number => {
+/**
+ * Determines the number of days a specific `Date` has been since 01/01/2000.
+ * @param date The `Date` in question
+ * @returns The number of days `date` has been since 01/01/2000.
+ */
+const getDayDiff = (date: Date): number => {
 	return Math.floor(
-		(date.valueOf() - new Date(date.getFullYear(), 0, 0).valueOf()) /
-			(1000 * 60 * 60 * 24)
+		(date.valueOf() - new Date(2000, 0, 0).valueOf()) / (1000 * 60 * 60 * 24)
 	);
 };
 
@@ -54,9 +58,9 @@ const getWordOfTheDay = (): string => {
 	}
 
 	cached_date = date; // Cache the date
-	const rng = seedrandom(getDayOfYear(date).toString());
+	const rng = seedrandom(getDayDiff(date).toString());
 	let idx: number = Math.floor(rng() * five_char_words.length);
 	cached_idx = idx; // Cache the index.
 	return five_char_words[idx];
 };
-export { getWordOfTheDay, getDayOfYear, isCharInWord };
+export { getWordOfTheDay, getDayDiff as getDayOfYear, isCharInWord };
